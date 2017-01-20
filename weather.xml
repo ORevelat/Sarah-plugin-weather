@@ -1,0 +1,134 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="ruleWEATHER" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+
+	<rule id="ruleWEATHER" scope="public">
+    	<tag>out.action=new Object();</tag>
+
+	    <item>Sarah s'il te plait</item>
+
+		<item>
+			<ruleref uri="#WEATHER" />
+			<tag>out.action.mode = "WEATHER"; out.action.date = rules.WEATHER.date; out.action.period = rules.WEATHER.period; out.action.zip = rules.WEATHER.zip;</tag>
+		</item>
+
+	    <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/weather";</tag>
+	</rule>
+
+	<rule id="WEATHER" scope="public">
+		<one-of>
+			<item>quelle est la météo</item>
+			<item>donne moi la météo</item>
+		</one-of>
+
+		<item repeat="0-1">
+			<ruleref uri="#WEATHER_TRASH"/>
+		</item>
+
+		<item>
+			<one-of>
+			
+				<item>
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_DATE"/>
+						<tag>out.date=rules.WEATHER_DATE.date</tag>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_PERIOD"/>
+						<tag>out.period=rules.WEATHER_PERIOD.period</tag>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_TRASH"/>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_ZIP"/>
+						<tag>out.zip=rules.WEATHER_ZIP.zip</tag>
+					</item>
+				</item>
+			
+				<item>
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_ZIP"/>
+						<tag>out.zip=rules.WEATHER_ZIP.zip</tag>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_TRASH"/>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_DATE"/>
+						<tag>out.date=rules.WEATHER_DATE.date</tag>
+					</item>
+
+					<item repeat="0-1">
+						<ruleref uri="#WEATHER_PERIOD"/>
+						<tag>out.period=rules.WEATHER_PERIOD.period</tag>
+					</item>
+				</item>
+				
+			</one-of>
+		</item>
+	</rule>
+		
+	<rule id="WEATHER_TRASH" scope="public">
+		<one-of>
+			<item>à</item>
+			<item>de</item>
+			<item>pour</item>
+			<item>pour ce</item>
+			<item>pour cet</item>
+			<item>pour cette</item>
+		</one-of>
+	</rule>
+
+	<rule id="WEATHER_DATE" scope="public">
+		<one-of>
+			<item>aujourd'hui <tag>out.date="0";</tag></item>
+			<item>demain <tag>out.date="1";</tag></item>
+			<item>après demain <tag>out.date="2";</tag></item>
+			<item>lundi <tag>out.date="lundi";</tag></item>
+			<item>mardi <tag>out.date="mardi";</tag></item>
+			<item>mercredi <tag>out.date="mercredi";</tag></item>
+			<item>jeudi <tag>out.date="jeudi";</tag></item>
+			<item>vendredi <tag>out.date="vendredi";</tag></item>
+			<item>samedi <tag>out.date="samedi";</tag></item>
+			<item>dimanche <tag>out.date="dimanche";</tag></item>
+		</one-of>
+	</rule>
+
+	<rule id="WEATHER_PERIOD" scope="public">
+		<one-of>
+			<item>matin<tag>out.period="morn";</tag></item>
+			<item>en ce moment<tag>out.period="day";</tag></item>
+			<item>dans la journée<tag>out.period="day";</tag></item>
+			<item>après-midi<tag>out.period="day";</tag></item>
+			<item>ce soir<tag>out.period="eve";</tag></item>
+			<item>soir<tag>out.period="eve";</tag></item>
+			<item>cette nuit<tag>out.period="night";</tag></item>
+			<item>dans la nuit<tag>out.period="night";</tag></item>
+		</one-of>
+	</rule>
+
+	<rule id="WEATHER_ZIP" scope="public">
+		<one-of>
+			<item>Auribeau <tag> out.zip="060070"; </tag></item>
+			<item>Auribeau sur Siagne <tag> out.zip="060070"; </tag></item>
+			<item>la maison <tag> out.zip="060070"; </tag></item>
+			<item>Bordeaux <tag> out.zip="330630"; </tag></item>
+			<item>Brest <tag> out.zip="290190"; </tag></item>
+			<item>Cruzy <tag> out.zip="340920"; </tag></item>
+			<item>Lyon <tag> out.zip="691230"; </tag></item>
+			<item>Marseille <tag> out.zip="130550"; </tag></item>
+			<item>Nisse <tag> out.zip="060880"; </tag></item>
+			<item>Nantes <tag> out.zip="441090"; </tag></item>
+			<item>Paris <tag> out.zip="750560"; </tag></item>
+			<item>Strasbourg <tag> out.zip="674820"; </tag></item>
+			<item>Toulouse <tag> out.zip="315550"; </tag></item>
+			<item>Ussèle <tag> out.zip="192750"; </tag></item>
+			<item>Dormelles <tag> out.zip="771610"; </tag></item>
+		</one-of>
+	</rule>
+
+</grammar>

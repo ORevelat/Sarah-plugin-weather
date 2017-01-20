@@ -1,0 +1,10 @@
+{
+	"modules" : { 
+		"weather"  : {
+			"description"		: "Plugin Weather",
+			"version"			: "1.0",
+			"weather_zip"		: "060070",
+			"weather_date"		: "0"
+		}
+	}
+}
